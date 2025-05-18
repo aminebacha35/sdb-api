@@ -1,63 +1,69 @@
+
 # 🚗 Backend - Garage Carrosserie Sens de Bretagne
 
-Bienvenue sur le backend du projet de prise de rendez-vous pour le garage.
+Bienvenue sur le backend du projet de prise de rendez-vous pour le garage de carrosserie situé à Sens-de-Bretagne.
 
-Ce backend est développé avec **Laravel 10** et utilise :
-- MySQL pour la base de données
-- Mailhog pour le test des mails
-- Laravel Sanctum pour l'authentification
-- Seeder pour la création d'un compte admin
-- API REST pour la gestion des rendez-vous et services
+Ce backend utilise :
 
----
+- **Laravel 10** pour la logique serveur et l’API
+- **Sanctum** pour l’authentification
+- **MySQL** pour la base de données
+- **Mailhog** pour les tests d’envoi d’e-mails
+- **Seeder** pour injecter un utilisateur admin et des types de services
+- Une API REST pour gérer les rendez-vous, les utilisateurs et les services
 
 ## ✅ Prérequis
 
-Avant de commencer, installe les outils suivants :
+Assure-toi d’avoir installé :
 
 - PHP >= 8.1
 - Composer
 - MySQL
-- Node.js (pour Laravel Mix si besoin)
-- [Mailhog](https://github.com/mailhog/MailHog)
-- Git
+- Node.js (si Laravel Mix est utilisé)
+- Mailhog
 
----
-
-## 📁 Cloner le projet
+## 📦 Cloner le projet
 
 ```bash
-git clone https://github.com/ton-utilisateur/garage-backend.git
-cd garage-backend
+git https://github.com/aminebacha35/sdb-api.git
+cd sdb-api
 git checkout main
 ```
 
-⚙️ Installation
+## ⚙️ Installation
 
-1. Récupérer les dépendances
+### 1. Installer les dépendances PHP
+
 ```bash
 composer install
 ```
 
-2. Copier le fichier .env
+### 2. Copier le fichier d’environnement
+
 ```bash
 cp .env.example .env
-3. Générer la clé d'application
-bash
-Copier
-Modifier
-php artisan key:generate
-🔧 Configuration .env
-Modifie .env pour qu’il ressemble à ceci (ajuste les infos MySQL si nécessaire) :
+```
 
-env
-Copier
-Modifier
-APP_NAME="Garage"
+### 3. Générer la clé d’application Laravel
+
+```bash
+php artisan key:generate
+```
+
+## 🔧 Configurer `.env`
+
+Voici une configuration de base :
+
+```env
+APP_NAME=Laravel
 APP_ENV=local
-APP_KEY=...
+APP_KEY=... (ta key que tu as generé)
 APP_DEBUG=true
-APP_URL=http://localhost:8000
+APP_URL=http://localhost
+
+LOG_CHANNEL=stack
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=debug
 
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -66,105 +72,111 @@ DB_DATABASE=garage_calendar
 DB_USERNAME=root
 DB_PASSWORD=
 
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+FILESYSTEM_DRIVER=local
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=cookie
+SESSION_LIFETIME=120
+
+MEMCACHED_HOST=127.0.0.1
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
 MAIL_MAILER=smtp
 MAIL_HOST=127.0.0.1
 MAIL_PORT=1025
 MAIL_USERNAME=null
 MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
-MAIL_FROM_ADDRESS="garage@example.com"
-MAIL_FROM_NAME="Garage Carrosserie"
+MAIL_FROM_ADDRESS=test@example.com
+MAIL_FROM_NAME="Garage"
+
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+AWS_USE_PATH_STYLE_ENDPOINT=false
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_APP_CLUSTER=mt1
+
+MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 
 SANCTUM_STATEFUL_DOMAINS=localhost:5173
 SESSION_DOMAIN=localhost
-🧪 Lancer Mailhog
-Installe Mailhog (si ce n'est pas fait) :
-Mac : brew install mailhog
 
-Linux : télécharge le binaire ici : https://github.com/mailhog/MailHog/releases
+```
 
-Windows : WSL ou Git Bash recommandé
 
-Lancer Mailhog :
-bash
-Copier
-Modifier
-mailhog
-Accède à l’interface : http://localhost:8025
+## 🧪 Lancer la base de données
 
-🧠 Lancer les migrations + seeders
-bash
-Copier
-Modifier
-php artisan migrate --seed
-Cela va :
+### 1. Migrations
 
-Créer toutes les tables
+```bash
+php artisan migrate
+```
 
-Injecter un utilisateur admin
+### 2. Seeders (admin + services)
 
-Ajouter des services types de base
+```bash
+php artisan db:seed
+```
 
-👤 Identifiants de test
-bash
-Copier
-Modifier
+Ou tout réinitialiser :
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+## 👤 Identifiants d’admin
+
+Un administrateur est créé automatiquement par le seeder :
+
+```
 Email : admin@garage.com
 Mot de passe : password
-(défini dans le fichier AdminUserSeeder.php)
+```
 
-🚀 Lancer le serveur Laravel
-bash
-Copier
-Modifier
+## 🚀 Lancer le serveur Laravel
+
+```bash
 php artisan serve
-Par défaut, disponible sur : http://localhost:8000
+```
 
-🔁 Mettre à jour (pull) le code
-Avant chaque session de travail :
+Accessible à : [http://localhost:8000](http://localhost:8000)
 
-bash
-Copier
-Modifier
+## 🔁 Mettre à jour le projet
+
+Avant toute modification :
+
+```bash
 git pull origin main
-📦 Autres commandes utiles
-Lancer uniquement les seeders :
+```
 
-bash
-Copier
-Modifier
-php artisan db:seed
-Supprimer et recréer toute la base :
+## 📂 Structure du projet
 
-bash
-Copier
-Modifier
-php artisan migrate:fresh --seed
-📮 Tester l'envoi d'e-mails
-Un e-mail est envoyé automatiquement à la création d’un rendez-vous. Tu peux le consulter sur :
+```
+app/
+├── Http/Controllers/        → Logique des routes API
+├── Models/                  → Modèles Laravel
+routes/
+├── api.php                  → Déclaration des routes API
+database/
+├── seeders/                 → Données par défaut (admin, services)
+resources/views/emails/     → Contenu des mails (ex: confirmation)
+```
 
-➡️ http://localhost:8025
+## ❓ Besoin d’aide ?
 
-📚 Structure du projet
-app/Models → modèles Eloquent (Appointment, ServiceType, User)
+Consulte ces sites si tu as besoin d'info :
 
-app/Http/Controllers → logique API
+- [https://laravel.com/docs](https://laravel.com/docs)
+- [https://chatgpt.com](https://chatgpt.com)
 
-routes/api.php → routes d'API
-
-database/seeders → fichiers pour créer des données test
-
-resources/views/emails → contenu des e-mails de confirmation
-
-❓ Besoin d’aide ?
-Parle directement au développeur principal du projet. Lis aussi la documentation officielle de Laravel : https://laravel.com/docs
-
-🛠️ À faire par le stagiaire
-Lire et comprendre la structure du code
-
-Ajouter un système de pagination sur les rendez-vous
-
-Implémenter un filtre par type de service
-
-Participer à l’écriture de tests (facultatif)
-
+**Bonne prise en main !**
