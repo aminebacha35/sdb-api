@@ -20,6 +20,7 @@ Route::get('/appointments', [AppointmentController::class, 'index']);
 Route::post('/appointments', [AppointmentController::class, 'store']);
 Route::get('/service-types', [ServiceTypeController::class, 'index']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/service-types', [ServiceTypeController::class, 'store']);
 Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 
 
@@ -28,7 +29,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/appointments/{id}', [AppointmentController::class, 'show']);
     Route::put('/appointments/{id}', [AppointmentController::class, 'update']);
     Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy']);
-    Route::post('/service-types', [ServiceTypeController::class, 'store']);
     Route::delete('/service-types/{id}', [ServiceTypeController::class, 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
