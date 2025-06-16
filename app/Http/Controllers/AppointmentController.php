@@ -28,7 +28,12 @@ class AppointmentController extends Controller
 
         $appointment = Appointment::create($validated);
 
-        Mail::to($validated['email'])->send(new AppointmentConfirmationMail($appointment));
+        try {
+            Mail::to($validated['email'])->send(new AppointmentConfirmationMail($appointment));
+        } catch (\Exception $e) {
+            \Log::error('Erreur lors de l\'envoi de l\'email : ' . $e->getMessage());
+            // On continue même si l'envoi d'email échoue
+        }
 
         $appointment->load('serviceType');
         return response()->json($appointment, 201);
