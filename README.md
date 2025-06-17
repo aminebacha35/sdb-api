@@ -1,5 +1,5 @@
 
-# 🚗 Backend - Garage Carrosserie Sens de Bretagne
+#  Backend - Garage Carrosserie Sens de Bretagne
 
 Bienvenue sur le backend du projet de prise de rendez-vous pour le garage de carrosserie situé à Sens-de-Bretagne.
 
@@ -12,7 +12,7 @@ Ce backend utilise :
 - **Seeder** pour injecter un utilisateur admin et des types de services
 - Une API REST pour gérer les rendez-vous, les utilisateurs et les services
 
-## ✅ Prérequis
+##  Prérequis
 
 Assure-toi d’avoir installé :
 
@@ -22,7 +22,7 @@ Assure-toi d’avoir installé :
 - Node.js (si Laravel Mix est utilisé)
 - Mailhog
 
-## 📦 Cloner le projet
+##  Cloner le projet
 
 ```bash
 git https://github.com/aminebacha35/sdb-api.git
@@ -30,7 +30,7 @@ cd sdb-api
 git checkout main
 ```
 
-## ⚙️ Installation
+##  Installation
 
 ### 1. Installer les dépendances PHP
 
@@ -50,7 +50,7 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-## 🔧 Configurer `.env`
+##  Configurer `.env`
 
 Voici une configuration de base :
 
@@ -76,7 +76,7 @@ BROADCAST_DRIVER=log
 CACHE_DRIVER=file
 FILESYSTEM_DRIVER=local
 QUEUE_CONNECTION=sync
-SESSION_DRIVER=cookie
+SESSION_DRIVER=file
 SESSION_LIFETIME=120
 
 MEMCACHED_HOST=127.0.0.1
@@ -114,7 +114,7 @@ SESSION_DOMAIN=localhost
 ```
 
 
-## 🧪 Lancer la base de données
+## Lancer la base de données
 
 ### 1. Migrations
 
@@ -134,7 +134,7 @@ Ou tout réinitialiser :
 php artisan migrate:fresh --seed
 ```
 
-## 👤 Identifiants d’admin
+## Identifiants d’admin
 
 Un administrateur est créé automatiquement par le seeder :
 
@@ -143,7 +143,7 @@ Email : admin@garage.com
 Mot de passe : password
 ```
 
-## 🚀 Lancer le serveur Laravel
+## Lancer le serveur Laravel
 
 ```bash
 php artisan serve
@@ -151,7 +151,7 @@ php artisan serve
 
 Accessible à : [http://localhost:8000](http://localhost:8000)
 
-## 🔁 Mettre à jour le projet
+## Mettre à jour le projet
 
 Avant toute modification :
 
@@ -159,7 +159,7 @@ Avant toute modification :
 git pull origin main
 ```
 
-## 📂 Structure du projet
+## Structure du projet
 
 ```
 app/
@@ -171,9 +171,6 @@ database/
 ├── seeders/                 → Données par défaut (admin, services)
 resources/views/emails/     → Contenu des mails (ex: confirmation)
 ```
-
-## ❓ Besoin d’aide ?
-
 Consulte ces sites si tu as besoin d'info :
 
 - [https://laravel.com/docs](https://laravel.com/docs)
