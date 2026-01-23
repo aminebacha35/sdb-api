@@ -13,7 +13,7 @@ class GarageEntries extends Migration
      */
     public function up(): void 
 {
-    Schema::create('appointments', function (Blueprint $table) {
+    Schema::create('garage_entries', function (Blueprint $table) {
         $table->id();
         $table->foreignId('appointment_id')->constrained('appointments')->onDelete('cascade');
         $table->dateTime('date_entree');
