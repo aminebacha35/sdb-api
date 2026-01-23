@@ -13,13 +13,13 @@ class GarageEntries extends Migration
      */
     public function up()
     {
-        //
+        //z
     }
 
     /**
      * Reverse the migrations.
      *
-     * @return void
+     * @return s
      */
     public function down()
     {
