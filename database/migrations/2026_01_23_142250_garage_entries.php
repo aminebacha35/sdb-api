@@ -11,18 +11,25 @@ class GarageEntries extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        //z
-    }
-
+    public function up(): void 
+{
+    Schema::create('appointments', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('appointment_id')->constrained('appointments')->onDelete('cascade');
+        $table->dateTime('date_entree');
+        $table->dateTime('date_sortie')->nullable();
+        $table->string('statut');
+        $table->text('commentaires')->nullable();
+        $table->timestamps();
+    });
+}
     /**
      * Reverse the migrations.
      *
-     * @return s
+     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        //
+        Schema::dropIfExists('garage_entries');
     }
-}
+};
