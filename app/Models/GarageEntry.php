@@ -9,8 +9,10 @@ class GarageEntry extends Model
 {
     use HasFactory;
 
+    //fillable = String 
     protected $fillable = [ 'appointment_id', 'date_entree', 'date_sortie', 'statut', 'commentaires'];
 
+    //Casts = Date 
     protected $casts = ['date_entree' => 'datetime', 'date_sortie' => 'datetime'];
 
         
