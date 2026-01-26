@@ -45,4 +45,25 @@ class GarageEntryController extends Controller
 
         return response()->json($entries);
     }
+
+        /**
+     * Mise à jour du statut et des commentaires d'un véhicule au garage
+     */
+    public function update(Request $request, $id)
+    {
+        $garageEntry = GarageEntry::findOrFail($id);
+
+        $data = $request->validate([
+            'statut' => 'required|in:en_attente,en_reparation',
+            'commentaires' => 'nullable|string',
+        ]);
+
+        $garageEntry->update($data);
+
+        return response()->json([
+            'message' => 'Véhicule mis à jour avec succès',
+            'data' => $garageEntry
+        ]);
+    }
+
 }
