@@ -19,14 +19,6 @@ class GarageEntry extends Model
     {
         return $this->belongsTo(Appointment::class);
     }
-
-    
-    public function getDaysInGarageAttribute()
-    {
-        $endDate = $this->date_sortie ?? now(); // date de sortie ou maintenant
-        return $this->date_entree->diffInDays($endDate);
-    }
-
 }
 
 
