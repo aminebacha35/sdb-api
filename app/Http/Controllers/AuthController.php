@@ -15,21 +15,31 @@ class AuthController extends Controller
         ]);
 
         if (!Auth::attempt($credentials)) {
-            return response()->json(['message' => 'Identifiants invalides'], 401);
+            return response()->json([
+                'message' => 'Identifiants invalides'
+            ], 401);
         }
 
-        $request->session()->regenerate();
+        $user = Auth::user();
 
-        return response()->json(['message' => 'Connexion réussie']);
+        // 🔑 Création du token Sanctum
+        $token = $user->createToken('api-token')->plainTextToken;
+
+        return response()->json([
+            'message' => 'Connexion réussie',
+            'token' => $token,
+            'user' => $user
+        ]);
     }
 
     public function logout(Request $request)
     {
-        Auth::guard('web')->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        // Supprimer le token courant
+        $request->user()->currentAccessToken()->delete();
 
-        return response()->json(['message' => 'Déconnexion réussie']);
+        return response()->json([
+            'message' => 'Déconnexion réussie'
+        ]);
     }
 
     public function me(Request $request)

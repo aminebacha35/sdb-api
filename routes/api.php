@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ServiceTypeController;
 use App\Http\Controllers\AuthController ;
+use App\Http\Controllers\GarageEntryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/appointments/{id}', [AppointmentController::class, 'update']);
     Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy']);
     Route::delete('/service-types/{id}', [ServiceTypeController::class, 'destroy']);
+    Route::post('/garage-entries/entry',[GarageEntryController::class, 'storeEntry']);
+    Route::get('/garage-entries/current', [GarageEntryController::class, 'current']);
+    Route::put('/garage-entries/{id}', [GarageEntryController::class, 'update']);
+    Route::put('/garage-entries/{id}/exit', [GarageEntryController::class, 'exit']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
