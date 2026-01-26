@@ -15,9 +15,10 @@ class GarageEntries extends Migration
 {
     Schema::create('garage_entries', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('appointment_id')->constrained('appointments')->onDelete('cascade');
+        $table->boolean('is_paid')->default(false);
         $table->dateTime('date_entree');
         $table->dateTime('date_sortie')->nullable();
+        $table->float('prix')->nullable();
         $table->string('statut');
         $table->text('commentaires')->nullable();
         $table->timestamps();
