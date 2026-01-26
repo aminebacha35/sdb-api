@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\GarageEntry;
 
 class GarageEntryController extends Controller
 {
-    
-
+    /**
+     * Enregistrer l'entrée d'un véhicule au garage
+     */
     public function storeEntry(Request $request)
     {
         $data = $request->validate([
@@ -27,5 +29,20 @@ class GarageEntryController extends Controller
             'message' => 'Entrée du véhicule enregistrée avec succès',
             'data' => $garageEntry,
         ], 201);
+    }
+
+    /**
+     * Liste des véhicules actuellement au garage
+     */
+    public function current()
+    {
+        $entries = GarageEntry::with([
+                'appointment',
+                'appointment.serviceType'
+            ])
+            ->whereNull('date_sortie')
+            ->get();
+
+        return response()->json($entries);
     }
 }

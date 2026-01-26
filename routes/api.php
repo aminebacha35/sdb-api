@@ -32,5 +32,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy']);
     Route::delete('/service-types/{id}', [ServiceTypeController::class, 'destroy']);
     Route::post('/garage-entries/entry',[GarageEntryController::class, 'storeEntry']);
+    Route::get('/garage-entries/current', [GarageEntryController::class, 'current']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
