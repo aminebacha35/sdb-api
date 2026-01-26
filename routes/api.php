@@ -34,5 +34,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/garage-entries/entry',[GarageEntryController::class, 'storeEntry']);
     Route::get('/garage-entries/current', [GarageEntryController::class, 'current']);
     Route::put('/garage-entries/{id}', [GarageEntryController::class, 'update']);
+    Route::put('/garage-entries/{id}/exit', [GarageEntryController::class, 'exit']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });

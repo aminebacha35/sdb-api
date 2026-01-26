@@ -66,4 +66,19 @@ class GarageEntryController extends Controller
         ]);
     }
 
+    public function exit($id)
+    {
+        $garageEntry = GarageEntry::findOrFail($id);
+
+        $garageEntry->update([
+            'statut' => 'termine',
+            'date_sortie' => now(),
+        ]);
+
+        return response()->json([
+            'message' => 'Sortie du véhicule enregistrée avec succès',
+            'data' => $garageEntry
+        ]);
+    }
+
 }
