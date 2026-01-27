@@ -81,4 +81,23 @@ class GarageEntryController extends Controller
         ]);
     }
 
+    public function history()
+    {
+        $entries = GarageEntry::with('appointment')
+            ->whereNotNull('date_sortie')
+            ->orderByDesc('date_sortie')
+            ->get()
+            ->map(function ($entry) {
+                return [
+                'id' => $entry->id,
+                'client' => $entry->appointment->client_nom,
+                'vehicule' => $entry->appointment->vehicule,
+                'date_entree' => $entry->date_entree->format('Y-m-d'),
+                'date_sortie' => $entry->date_sortie->format('Y-m-d'),
+                'duree_presence_jours' => $entry->days_in_garage,
+            ];
+        });
+
+    return response()->json($entries);
+    }
 }
