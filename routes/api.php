@@ -37,4 +37,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/garage-entries/{id}/exit', [GarageEntryController::class, 'exit']);
     Route::get('/garage-entries/history', [GarageEntryController::class, 'history']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/garage-entries/stats', [GarageEntryController::class, 'stats']);
 });

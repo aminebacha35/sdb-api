@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\GarageEntry;
+use Carbon\Carbon;
 
 class GarageEntryController extends Controller
 {
@@ -100,4 +101,29 @@ class GarageEntryController extends Controller
 
     return response()->json($entries);
     }
+
+    public function stats()
+{
+    //Véhicules actuellement au garage
+    $currentCount = GarageEntry::whereNull('date_sortie')->count();
+
+    //Durée moyenne de présence (en jours)
+    $averageDuration = GarageEntry::whereNotNull('date_sortie')
+        ->get()
+        ->avg(function ($entry) {
+            return $entry->date_entree->diffInDays($entry->date_sortie);
+        });
+
+    //Véhicules sortis ce mois
+    $monthlyExits = GarageEntry::whereNotNull('date_sortie')
+        ->whereMonth('date_sortie', Carbon::now()->month)
+        ->whereYear('date_sortie', Carbon::now()->year)
+        ->count();
+
+    return response()->json([
+        'vehicules_actuellement_au_garage' => $currentCount,
+        'duree_moyenne_presence_jours' => round($averageDuration, 1),
+        'vehicules_sortis_ce_mois' => $monthlyExits,
+    ]);
+}
 }
